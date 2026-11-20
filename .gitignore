@@ -1,0 +1,56 @@
+
+# ==========================================
+# UK REGIONAL GVA DATA WAREHOUSE
+# Git Ignore Configuration
+# ==========================================
+
+# Python cache
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Local datasets
+data/raw/
+data/processed/
+data/*.csv
+data/*.xlsx
+data/*.parquet
+
+# SQL Server backups
+*.bak
+*.mdf
+*.ldf
+
+# Power BI temporary files
+*.pbitmp
+*.tmp
+
+# Local Power BI reports
+*.pbix
+
+# IDE settings
+.vscode/
+.idea/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
+
+# Temporary files
+~$*
+*.temp
