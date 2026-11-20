@@ -1,0 +1,161 @@
+
+/*
+==================================================
+PROJECT: UK Regional GVA Data Warehouse
+FILE: measures.dax
+
+PURPOSE:
+Document reusable Power BI DAX measures
+for economic performance and COVID recovery.
+
+DATA MODEL:
+gold_FactRegionalGVA
+gold_DimRegion
+gold_DimIndustry
+gold_DimDate
+
+SOURCE UNIT:
+GBP millions (£m)
+
+IMPORTANT:
+Each measure is a separate DAX definition.
+Create each measure individually in Power BI.
+==================================================
+*/
+
+
+// ================================================
+// 1. TOTAL GVA (£m)
+// ================================================
+
+Total GVA (£m) =
+SUM(
+    gold_FactRegionalGVA[GVAMillionGBP]
+)
+
+
+// ================================================
+// 2. TOTAL GVA (£bn)
+// ================================================
+
+Total GVA (£bn) =
+DIVIDE(
+    [Total GVA (£m)],
+    1000
+)
+
+
+// ================================================
+// 3. PREVIOUS YEAR GVA (£m)
+// ================================================
+
+Previous Year GVA (£m) =
+VAR CurrentYear =
+    SELECTEDVALUE(gold_DimDate[Year])
+
+RETURN
+IF(
+    NOT ISBLANK(CurrentYear),
+    CALCULATE(
+        [Total GVA (£m)],
+        REMOVEFILTERS(gold_DimDate),
+        gold_DimDate[Year] = CurrentYear - 1
+    )
+)
+
+
+// ================================================
+// 4. YEAR-ON-YEAR GVA CHANGE (£m)
+// ================================================
+
+YoY GVA Change (£m) =
+VAR PreviousGVA =
+    [Previous Year GVA (£m)]
+
+RETURN
+IF(
+    NOT ISBLANK(PreviousGVA),
+    [Total GVA (£m)] - PreviousGVA
+)
+
+
+// ================================================
+// 5. YEAR-ON-YEAR GROWTH (%)
+// ================================================
+
+YoY Growth % =
+DIVIDE(
+    [YoY GVA Change (£m)],
+    [Previous Year GVA (£m)]
+)
+
+
+// ================================================
+// 6. GROWTH SINCE 1998 (%)
+// ================================================
+
+Growth Since 1998 % =
+VAR BaseYearGVA =
+    CALCULATE(
+        [Total GVA (£m)],
+        REMOVEFILTERS(gold_DimDate),
+        gold_DimDate[Year] = 1998
+    )
+
+RETURN
+DIVIDE(
+    [Total GVA (£m)] - BaseYearGVA,
+    BaseYearGVA
+)
+
+
+// ================================================
+// 7. COVID IMPACT (%)
+// ================================================
+
+COVID Impact % =
+VAR GVA2019 =
+    CALCULATE(
+        [Total GVA (£m)],
+        REMOVEFILTERS(gold_DimDate),
+        gold_DimDate[Year] = 2019
+    )
+
+VAR GVA2020 =
+    CALCULATE(
+        [Total GVA (£m)],
+        REMOVEFILTERS(gold_DimDate),
+        gold_DimDate[Year] = 2020
+    )
+
+RETURN
+DIVIDE(
+    GVA2020 - GVA2019,
+    GVA2019
+)
+
+
+// ================================================
+// 8. RECOVERY VS 2019 (%)
+// ================================================
+
+Recovery vs 2019 % =
+VAR GVA2019 =
+    CALCULATE(
+        [Total GVA (£m)],
+        REMOVEFILTERS(gold_DimDate),
+        gold_DimDate[Year] = 2019
+    )
+
+VAR GVA2022 =
+    CALCULATE(
+        [Total GVA (£m)],
+        REMOVEFILTERS(gold_DimDate),
+        gold_DimDate[Year] = 2022
+    )
+
+RETURN
+DIVIDE(
+    GVA2022 - GVA2019,
+    GVA2019
+)
