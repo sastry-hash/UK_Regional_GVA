@@ -1,4 +1,4 @@
-# UK_Regional_GVA
+
 # UK Regional GVA Data Warehouse & Power BI Analytics
 
 **End-to-End Business Intelligence Project | Python | SQL Server | T-SQL | Power BI | DAX**
