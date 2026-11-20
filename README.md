@@ -1,157 +1,249 @@
-
 # UK Regional GVA Data Warehouse & Power BI Analytics
 
-**End-to-End Business Intelligence Project | Python | SQL Server | T-SQL | Power BI | DAX**
+**End-to-End Business Intelligence Portfolio Project | Python | SQL Server | T-SQL | Power BI | DAX**
+
+An end-to-end Business Intelligence solution that transforms Office for National Statistics (ONS) regional Gross Value Added (GVA) data into a structured SQL Server data warehouse and interactive Power BI dashboards.
+
+The project demonstrates practical experience in **ETL development, dimensional modelling, SQL analytics, data validation, DAX calculations and business intelligence reporting**.
+
+**Reporting Period:** 1998–2023  
+**Data Source:** Office for National Statistics (ONS)  
+**Architecture:** Bronze–Silver–Gold (Medallion Architecture)  
+**Analytical Model:** Dimensional Star Schema
+
+---
 
 ## 1. Project Overview
 
-This project develops an end-to-end Business Intelligence (BI) solution to analyse regional economic performance across the United Kingdom using Gross Value Added (GVA) data from the Office for National Statistics (ONS).
+This project analyses regional and industry-level economic performance across the United Kingdom using ONS Gross Value Added (GVA) data.
 
-The solution processes annual regional and industry-level economic data covering **1998–2023**, transforms it into a structured SQL Server data warehouse, and provides interactive Power BI dashboards for economic performance analysis.
+The solution integrates Python-based data preparation, SQL Server data warehousing and Power BI reporting into a structured analytical workflow.
 
-A **Bronze–Silver–Gold (Medallion) Architecture** was implemented to manage raw ingestion, data cleaning, validation and analytical modelling.
+The warehouse follows a **Bronze–Silver–Gold architecture**, with the Gold layer implementing a dimensional star schema consisting of Region, Industry and Date dimensions connected to a central GVA fact table.
 
-The Gold layer follows a **dimensional star schema**, with a central fact table connected to Region, Industry and Date dimensions.
+The resulting Power BI dashboards support:
 
-The project demonstrates practical skills in data engineering, SQL development, ETL processing, dimensional modelling, data quality, analytical reporting and business intelligence.
+- Regional economic performance comparisons.
+- Historical GVA trend analysis.
+- Year-on-year economic growth calculations.
+- SIC07 industry performance analysis.
+- COVID-19 economic impact assessment.
+- Post-pandemic economic recovery comparisons.
+
+This is an independent technical portfolio project developed to demonstrate real-world business intelligence and data warehousing practices.
 
 ---
 
-## 2. Business Problem
+## 2. Power BI Dashboard Preview
 
-Regional economic data is often distributed across large datasets containing multiple geographic classifications, industry hierarchies and reporting periods.
+The reporting solution includes three interactive analytical dashboards.
 
-Without a structured analytical model, comparing economic performance across regions and industries can be difficult.
+### Dashboard 1 — Regional Economic Overview
 
-The main challenges include:
+![Regional Economic Overview](screenshots/regional_overview.png)
 
-- Managing multiple geographic and industry classifications.
-- Identifying differences in regional economic performance.
-- Analysing long-term economic growth.
-- Comparing industry contributions across regions.
-- Investigating the economic impact of COVID-19.
-- Avoiding double counting across overlapping aggregation levels.
-- Providing consistent and reusable analytical metrics.
+**Purpose:** Analyse regional economic performance and historical growth.
+
+**Key features:**
+
+- Total GVA KPI.
+- Previous Year GVA.
+- Year-on-Year Growth %.
+- Regional GVA comparisons.
+- Historical economic trends.
+- Interactive region and reporting-year slicers.
+
+### Dashboard 2 — Industry Performance
+
+![Industry Performance](screenshots/industry_performance.png)
+
+**Purpose:** Compare economic contributions across SIC07 industries.
+
+**Key features:**
+
+- Top-performing industry divisions.
+- Industry GVA comparisons.
+- Industry growth trends.
+- Region and industry filtering.
+- SIC07 classification-level analysis.
+
+### Dashboard 3 — COVID-19 Impact and Recovery
+
+![COVID-19 Impact and Recovery](screenshots/covid_impact.png)
+
+**Purpose:** Examine regional and industry-level economic changes during and after the initial COVID-19 period.
+
+**Key features:**
+
+- COVID Impact %.
+- Recovery vs 2019 %.
+- GVA comparisons for 2019–2022.
+- Regional and industry performance analysis.
+- Interactive reporting filters.
+
+For additional details, see [Power BI Documentation](powerbi/README.md).
+
+---
+
+## 3. Business Problem and Objectives
+
+Regional economic datasets contain multiple geographic classifications, industry hierarchies and reporting periods.
+
+Analysing these datasets directly can create challenges involving data consistency, aggregation accuracy and reporting efficiency.
+
+### Business Challenges
+
+- Comparing economic performance across UK regions.
+- Analysing historical growth patterns.
+- Identifying leading industry contributors.
+- Measuring the economic impact of COVID-19.
+- Managing overlapping geographic and industry classifications.
+- Preventing double counting in aggregated economic measures.
+- Producing consistent analytical metrics.
 
 ### Project Objectives
 
-The solution was designed to:
-
-1. Build a structured SQL Server data warehouse for regional GVA analysis.
-2. Develop an ETL pipeline using Python and T-SQL.
-3. Implement a Bronze–Silver–Gold data architecture.
-4. Design a dimensional star schema for analytical reporting.
+1. Develop a structured SQL Server data warehouse.
+2. Prepare and validate source data using Python and Pandas.
+3. Implement Bronze, Silver and Gold processing layers.
+4. Design a dimensional star schema.
 5. Develop reusable SQL views and stored procedures.
-6. Create DAX measures for economic performance analysis.
-7. Build interactive Power BI dashboards.
-8. Apply data-quality checks throughout the pipeline.
-9. Maintain project code and documentation using Git and GitHub.
+6. Implement data quality and reconciliation checks.
+7. Create DAX measures for economic performance analysis.
+8. Develop interactive Power BI dashboards.
+9. Maintain source code and documentation using GitHub.
 
 ---
 
-## 3. Technology Stack
+## 4. Technology Stack
 
-| Technology | Purpose |
+| Technology | Application |
 |---|---|
-| Python | Source-data preparation and transformation |
-| Pandas | Data profiling, cleaning and validation |
-| Google Colab | Python-based data preparation |
-| Microsoft SQL Server | Relational data warehouse |
-| SQL Server Management Studio | SQL development and database management |
-| T-SQL | ETL, transformations and analytical queries |
-| SQL Window Functions | Growth comparisons and industry rankings |
-| Power BI Desktop | Interactive dashboards and semantic modelling |
-| DAX | KPI and business measure development |
-| Git | Source-code version control |
-| GitHub | Repository hosting and technical documentation |
+| Python | Data preparation and validation |
+| Pandas | Data profiling, cleaning and transformation |
+| Google Colab | Python-based development |
+| SQL Server | Relational data warehouse |
+| SSMS | SQL development and database administration |
+| T-SQL | ETL, data transformation and analytical queries |
+| SQL Window Functions | Growth calculations and industry rankings |
+| Power BI Desktop | Interactive reporting and semantic modelling |
+| DAX | KPI development and time-based calculations |
+| Git | Version control |
+| GitHub | Source-code hosting and documentation |
 
 ---
 
-## 4. Data Source
+## 5. Dataset and Source
 
-**Source:** Office for National Statistics (ONS)
+**Data Provider:** Office for National Statistics (ONS)
 
 **Dataset:** UK Regional Gross Value Added (GVA)
 
-**Reporting period:** 1998–2023
+**Reporting Period:** 1998–2023
 
-### Dataset Characteristics
+### Prepared Dataset Characteristics
 
 | Attribute | Value |
 |---|---|
-| Records | 44,928 |
+| Total records | 44,928 |
 | Geographic entities | 16 |
-| SIC07 codes | 108 |
+| SIC07 industry codes | 108 |
 | Reporting years | 26 |
 | Earliest year | 1998 |
 | Latest year | 2023 |
-| GVA unit | £ million |
+| Economic measure | Gross Value Added |
+| Measurement unit | £ million |
 
-The dataset contains economic output values classified by geographic area, industry and year.
+These figures describe the prepared analytical dataset used in the project.
 
 ### Main Attributes
 
-- ITL geographic code
-- Region name
-- Geographic classification
-- SIC07 industry code
-- Industry description
-- Industry classification level
-- Reporting year
-- GVA value in £ million
+- `ITLCode` — Geographic identifier.
+- `RegionName` — Geographic area name.
+- `GeographyLevel` — Geographic hierarchy classification.
+- `SIC07Code` — Industry classification code.
+- `SIC07Description` — Industry description.
+- `IndustryLevel` — Industry hierarchy level.
+- `Year` — Reporting year.
+- `GVAMillionGBP` — GVA expressed in £ millions.
 
-### Data Modelling Considerations
+### Important Aggregation Consideration
 
-The dataset contains overlapping industry hierarchy levels, including TOTAL, SECTOR, SECTION, SUBSECTION and DIVISION.
+The dataset includes overlapping industry classifications such as TOTAL, SECTOR, SECTION, SUBSECTION and DIVISION.
 
-These classifications must be filtered appropriately during analysis because summing across multiple hierarchy levels can result in double counting.
+These classifications must be filtered appropriately to prevent double counting.
 
-Similarly, geographic totals must be separated from regional observations when calculating regional comparisons.
+Similarly, geographic aggregates should not be combined with their constituent regions when calculating overall economic output.
 
 ---
 
-## 5. Data Warehouse Architecture
+## 6. Data Warehouse Architecture
 
-The project implements a Medallion Architecture consisting of three data-processing layers.
+The project follows a **Bronze–Silver–Gold Medallion Architecture**.
 
-**Data Flow:**
+### Data Processing Workflow
 
-ONS Source Data → Python/Pandas → Bronze → Silver → Gold → Power BI
+```text
+Office for National Statistics
+            |
+            v
+    Python / Pandas
+    Data Preparation
+            |
+            v
+     BRONZE LAYER
+    Raw Data Ingestion
+            |
+            v
+     SILVER LAYER
+ Cleaning and Validation
+            |
+            v
+      GOLD LAYER
+   Dimensional Star Schema
+            |
+            v
+      POWER BI
+   Semantic Model + DAX
+            |
+            v
+  Interactive BI Dashboards
+```
 
-### Bronze Layer — Raw Ingestion
+### Bronze Layer — Data Ingestion
 
 **Table:** `bronze.RegionalGVA_Raw`
 
-The Bronze layer stores source records after ingestion into SQL Server.
+The Bronze layer stores prepared source records ingested into SQL Server.
 
-Responsibilities:
+Key responsibilities:
 
-- Preserve the source data.
+- Preserve the ingested source structure.
 - Support source-to-database reconciliation.
-- Provide traceability for downstream transformations.
-- Enable inspection of raw data quality.
+- Provide traceability for transformations.
+- Enable initial data quality inspection.
 
-The Bronze dataset contains 44,928 records.
-
-### Silver Layer — Data Cleaning and Validation
+### Silver Layer — Data Transformation
 
 **Table:** `silver.RegionalGVA_Clean`
 
-The Silver layer standardises the data and prepares it for dimensional modelling.
+The Silver layer prepares the data for analytical modelling.
 
-Transformations and checks include:
+Transformations include:
 
-- Whitespace removal.
-- Data-type standardisation.
-- Year-range validation.
-- Numeric-value validation.
+- Whitespace standardisation.
+- Data-type validation.
+- Reporting-year filtering.
+- Missing-value checks.
 - Duplicate detection.
-- Missing-value inspection.
-- Preparation of consistent region and industry identifiers.
+- Numeric-value validation.
+- Consistent region and industry identifiers.
 
-### Gold Layer — Analytical Data Model
+Batch-based loading was introduced to address SQL Server memory limitations during transformation.
 
-The Gold layer contains analytics-ready dimensional tables.
+### Gold Layer — Analytical Modelling
+
+The Gold layer contains dimension and fact tables designed for Power BI reporting.
 
 **Dimension Tables:**
 
@@ -163,56 +255,40 @@ The Gold layer contains analytics-ready dimensional tables.
 
 - `gold.FactRegionalGVA`
 
-This model provides the foundation for SQL analytics and Power BI reporting.
+The model separates descriptive attributes from numerical observations to support reusable analytical calculations.
 
 ---
 
-## 6. Dimensional Data Modelling
+## 7. Dimensional Star Schema
 
-A star schema was designed to separate numerical GVA observations from descriptive dimensions.
+The Gold layer uses a star schema with one fact table and three dimensions.
 
-### DimRegion
+```text
+                 DimDate
+                    |
+                    |
+DimRegion ---- FactRegionalGVA ---- DimIndustry
+```
 
-Stores geographic information.
+### Dimension Tables
 
-| Column | Description |
-|---|---|
-| RegionKey | Surrogate primary key |
-| ITLCode | Geographic identifier |
-| RegionName | Geographic area |
-| GeographyLevel | Geographic classification |
+| Table | Primary key | Description |
+|---|---|---|
+| DimRegion | RegionKey | Geographic codes, names and hierarchy |
+| DimIndustry | IndustryKey | SIC07 codes, descriptions and hierarchy |
+| DimDate | DateKey | Reporting-year information |
 
-### DimIndustry
+### Fact Table
 
-Stores industry information.
-
-| Column | Description |
-|---|---|
-| IndustryKey | Surrogate primary key |
-| SIC07Code | Industry classification code |
-| SIC07Description | Industry description |
-| IndustryLevel | Industry hierarchy level |
-
-### DimDate
-
-Stores the reporting year.
+**`gold.FactRegionalGVA`**
 
 | Column | Description |
 |---|---|
-| DateKey | Surrogate primary key |
-| Year | Reporting year |
-
-### FactRegionalGVA
-
-Stores numerical GVA observations.
-
-| Column | Description |
-|---|---|
-| GVAKey | Fact primary key |
+| GVAKey | Fact-table primary key |
 | RegionKey | Foreign key to DimRegion |
 | IndustryKey | Foreign key to DimIndustry |
 | DateKey | Foreign key to DimDate |
-| GVAMillionGBP | GVA value in £ million |
+| GVAMillionGBP | GVA value in £ millions |
 
 ### Relationships
 
@@ -220,368 +296,289 @@ Stores numerical GVA observations.
 - DimIndustry (1) → (*) FactRegionalGVA
 - DimDate (1) → (*) FactRegionalGVA
 
-The model supports consistent filtering, aggregation and reuse of analytical measures.
+The fact-table grain represents one geographic code, SIC07 industry code and reporting year.
+
+This structure supports dimensional filtering and analytical reporting in Power BI.
 
 ---
 
-## 7. ETL Pipeline Implementation
+## 8. ETL Pipeline Implementation
 
-### Stage 1 — Data Preparation
+### Stage 1 — Python Data Preparation
 
-Python and Pandas were used to inspect and prepare the source data.
+Python and Pandas were used to inspect, validate and prepare the source dataset.
 
 Activities included:
 
-- Reviewing data structure and column types.
-- Inspecting geographic and industry classifications.
-- Validating reporting years.
-- Checking missing and duplicate records.
-- Preparing the dataset for SQL Server ingestion.
+- Dataset profiling.
+- Data-type inspection.
+- Missing-value analysis.
+- Duplicate detection.
+- Reporting-year validation.
+- Preparing data for SQL Server ingestion.
+
+A pipe-delimited CSV export was introduced to resolve delimiter-related import issues.
 
 ### Stage 2 — Bronze Ingestion
 
-The prepared dataset was loaded into the SQL Server Bronze schema.
+The prepared dataset was loaded into SQL Server using T-SQL.
 
-The ingestion process was validated through row-count and data-type checks.
+Data ingestion was checked through record counts and schema validation.
 
 ### Stage 3 — Silver Transformation
 
-T-SQL transformations were applied to clean and standardise the Bronze data.
+T-SQL transformations were used to standardise records and prepare them for dimensional modelling.
 
-The Silver load was implemented using smaller processing batches after an initial memory-related error.
+A batch-based processing approach was introduced after a memory-related failure during the initial transformation.
 
-### Stage 4 — Gold Dimensional Modelling
+### Stage 4 — Gold Modelling
 
-Distinct geographic, industry and date attributes were used to populate the dimension tables.
+Distinct region, industry and date attributes were used to populate the dimension tables.
 
-The central fact table was populated using the corresponding dimension keys.
+The fact table was populated by mapping source business keys to the corresponding dimensional surrogate keys.
 
-### Stage 5 — Analytical SQL Development
+### Stage 5 — SQL Analytics
 
-Reusable views, stored procedures and indexes were developed to support economic analysis and reporting.
+Reusable SQL views, stored procedures and indexes were developed to support reporting and analysis.
 
 ### Stage 6 — Power BI Integration
 
-The Gold dimensional tables were imported into Power BI.
+The Gold tables were imported into Power BI.
 
-Relationships, DAX measures, slicers and interactive visuals were developed to support regional and industry-level economic analysis.
-
----
-
-## 8. SQL Analytical Objects
-
-The Gold layer includes reusable analytical views.
-
-### Regional Performance
-
-`gold.vw_RegionalPerformance`
-
-Supports regional economic comparisons and aggregation.
-
-### Year-on-Year Growth
-
-`gold.vw_YearOnYearGrowth`
-
-Uses SQL window functions to compare GVA between consecutive reporting years.
-
-### Industry Performance
-
-`gold.vw_IndustryPerformance`
-
-Uses ranking logic to compare industry performance.
-
-### COVID Recovery
-
-`gold.vw_CovidRecovery`
-
-Supports analysis of GVA changes between 2019, 2020, 2021 and 2022.
-
-### Stored Procedure
-
-`gold.usp_GetRegionalGVA`
-
-Provides parameterised retrieval of regional GVA data.
-
-### Database Indexing
-
-Indexes were created on fact-table dimensional keys to support analytical queries.
+Relationships, DAX measures, slicers and interactive visualisations were configured to support regional and industry-level analysis.
 
 ---
 
-## 9. Power BI Dashboard
+## 9. SQL Analytics and DAX Measures
 
-The reporting solution contains three analytical pages.
+### SQL Analytical Objects
 
-### Dashboard 1 — Regional Economic Overview
+| SQL object | Purpose |
+|---|---|
+| `gold.vw_RegionalPerformance` | Regional and industry GVA analysis |
+| `gold.vw_YearOnYearGrowth` | Annual growth calculations using LAG |
+| `gold.vw_IndustryPerformance` | Industry rankings using RANK |
+| `gold.vw_CovidRecovery` | COVID impact and recovery comparisons |
+| `gold.usp_GetRegionalGVA` | Parameterised regional data retrieval |
 
-**Purpose:** Analyse regional economic performance and long-term growth.
+Indexes were also defined on fact-table dimensional keys to support query access patterns.
 
-Features:
-
-- Total GVA KPI.
-- Previous Year GVA.
-- Year-on-Year Growth %.
-- Regional GVA comparison.
-- Historical economic trends.
-- Interactive region and year filters.
-
-The dashboard supports comparison of English regions while keeping geographic aggregation levels separate.
-
-### Dashboard 2 — Industry Performance
-
-**Purpose:** Analyse the contribution and performance of SIC07 industries.
-
-Features:
-
-- Top 10 industries by GVA.
-- Industry-level GVA trends.
-- Selected-industry Total GVA.
-- Industry Year-on-Year Growth %.
-- Regional filtering.
-- SIC07 Division-level analysis.
-
-### Dashboard 3 — COVID Impact and Recovery
-
-**Purpose:** Examine economic changes during and after the initial COVID-19 period.
-
-Features:
-
-- 2019–2022 GVA trend analysis.
-- COVID Impact %.
-- Recovery vs 2019 %.
-- Industry and regional slicers.
-- Comparison of pre-COVID and recovery-period performance.
-
----
-
-## 10. DAX Measures
-
-The Power BI semantic model includes the following analytical measures:
+### Power BI DAX Measures
 
 | Measure | Purpose |
 |---|---|
-| Total GVA | Calculates total GVA for the selected context |
-| Previous Year GVA | Calculates GVA for the preceding year |
-| YoY Change | Calculates absolute annual change |
-| YoY Growth % | Calculates annual percentage growth |
-| GVA Growth Since 1998 % | Measures growth relative to the 1998 baseline |
-| COVID Impact % | Measures GVA change from 2019 to 2020 |
-| Recovery vs 2019 % | Measures 2022 GVA relative to 2019 |
+| Total GVA | Economic output for the selected filter context |
+| Previous Year GVA | GVA for the preceding reporting year |
+| YoY GVA Change | Absolute annual economic change |
+| YoY Growth % | Annual percentage growth |
+| Growth Since 1998 % | Growth relative to the 1998 baseline |
+| COVID Impact % | Change in GVA between 2019 and 2020 |
+| Recovery vs 2019 % | Change in GVA between 2019 and 2022 |
 
-The calculations use DAX functions including CALCULATE, FILTER, ALL, REMOVEFILTERS, VAR and DIVIDE.
+DAX development used functions including `CALCULATE`, `DIVIDE`, `VAR` and `REMOVEFILTERS`.
 
----
-
-## 11. Technical Challenges and Solutions
-
-### Challenge 1 — CSV Delimiter and Data Conversion Errors
-
-**Problem:**
-
-During the initial SQL Server bulk ingestion, the source dataset contained commas within industry descriptions.
-
-Using a basic comma field delimiter caused incorrect column separation and data-conversion errors.
-
-**Solution:**
-
-Python and Pandas were used to prepare a pipe-delimited export.
-
-The SQL Server bulk-loading configuration was updated to use the corresponding delimiter.
-
-**Outcome:**
-
-The source data was successfully ingested into the Bronze layer.
-
-**Technical learning:**
-
-Source-file structure and delimiter handling must be validated before ingestion.
-
-### Challenge 2 — SQL Server Buffer Pool Memory
-
-**Problem:**
-
-An initial attempt to transform and insert the complete Bronze dataset into the Silver layer resulted in an insufficient buffer-pool-memory error.
-
-**Solution:**
-
-The ETL approach was modified to process records in smaller batches.
-
-Row counts and duplicate checks were used to validate the transformation.
-
-**Outcome:**
-
-The Silver dataset was successfully populated.
-
-**Technical learning:**
-
-ETL processes should account for database resource constraints and support reliable validation.
-
-### Challenge 3 — Duplicate Records During ETL
-
-**Problem:**
-
-Repeated loading attempts introduced duplicate records during development.
-
-**Solution:**
-
-The transformation and loading process was reviewed, and row-count and duplicate-validation queries were applied before proceeding to the Gold layer.
-
-**Outcome:**
-
-The warehouse was reconciled against the expected source records.
-
-**Technical learning:**
-
-ETL pipelines require repeatable loading strategies and data-quality controls.
-
-### Challenge 4 — Industry Hierarchy Double Counting
-
-**Problem:**
-
-The dataset contained multiple overlapping SIC07 aggregation levels.
-
-Combining these levels could produce misleading GVA totals.
-
-**Solution:**
-
-Industry hierarchy attributes were retained in DimIndustry, allowing Power BI visuals to filter the appropriate level.
-
-**Technical learning:**
-
-Understanding source-data granularity is essential for accurate BI reporting.
-
-### Challenge 5 — Power BI Measure Formatting
-
-**Problem:**
-
-Percentage measures initially displayed as decimal values or were rounded incorrectly in Power BI cards.
-
-**Solution:**
-
-DAX measures were reviewed and formatted as percentages with appropriate decimal precision.
-
-**Technical learning:**
-
-Analytical correctness includes both calculation logic and accurate presentation.
+Measure definitions are documented in [Power BI DAX Measures](powerbi/measures.dax).
 
 ---
 
-## 12. Data Quality and Validation
+## 10. Power BI Dashboard Features
 
-Validation was performed across the warehouse development process.
+### Regional Economic Overview
 
-Key checks included:
+Provides a high-level analysis of regional economic output and historical performance.
 
-- Bronze and Silver row-count reconciliation.
-- Duplicate detection.
-- Missing-value validation.
-- Year-range validation.
-- GVA numeric-value checks.
+Visualisations include KPI cards, regional comparisons, historical trends and interactive slicers.
+
+### Industry Performance
+
+Supports analysis of SIC07 industry divisions and their contributions to regional economic activity.
+
+Visualisations include industry rankings, comparative bar charts and time-series analysis.
+
+### COVID-19 Impact and Recovery
+
+Examines the economic changes observed between the pre-pandemic baseline and subsequent reporting years.
+
+The dashboard compares GVA in 2019, 2020, 2021 and 2022 to support regional and industry recovery analysis.
+
+### Interactive Analysis
+
+Dashboard users can filter reporting results by:
+
+- Geographic area.
+- Reporting year.
+- Industry classification.
+- SIC07 industry description.
+
+---
+
+## 11. Data Quality and Technical Challenges
+
+Data validation was performed across the warehouse development process.
+
+### Data Quality Checks
+
+- Bronze-to-Silver row-count reconciliation.
+- Missing-value detection.
+- Duplicate business-key validation.
+- Reporting-year verification.
+- Numeric-value validation.
 - Dimension uniqueness.
-- Fact-to-dimension key matching.
-- Geographic hierarchy filtering.
-- Industry hierarchy filtering.
+- Fact-to-dimension relationship validation.
+- Industry and geographic hierarchy checks.
 
-These checks help ensure the analytical model remains consistent with the prepared source data.
+### Technical Challenges
 
----
+| Challenge | Solution |
+|---|---|
+| CSV delimiter and conversion errors | Python/Pandas pipe-delimited export |
+| SQL Server buffer-pool memory limitations | Batch-based Silver processing |
+| Duplicate records during repeated loads | Business-key checks and load validation |
+| Inflated totals from overlapping hierarchies | Hierarchy-aware filtering and model review |
+| Incorrect percentage display | DAX calculation and formatting review |
+| Unexpected slicer behaviour | Relationship and visual interaction checks |
 
-## 13. Git and Version Control
+These challenges reinforced the importance of data quality, appropriate aggregation, resource-aware ETL and reporting validation.
 
-Git and GitHub are used to organise and maintain the project's source code and documentation.
-
-The repository separates Python scripts, SQL transformations, analytical queries, Power BI assets and supporting documentation.
-
-### Version Control Approach
-
-- Maintain the stable project on the `main` branch.
-- Use descriptive commit messages.
-- Track changes to Python, SQL and DAX code.
-- Document technical changes and improvements.
-- Use feature branches for future development.
-- Tag validated project releases.
-
-### Example Commit Messages
-
-- `docs: add project overview and architecture`
-- `feat: add bronze ingestion scripts`
-- `feat: implement silver data transformations`
-- `feat: create gold star schema`
-- `feat: add analytical SQL views`
-- `feat: add Power BI DAX measures`
-- `docs: document ETL technical challenges`
-
-Version control provides a traceable development history for future improvements.
+For detailed explanations, see [Technical Challenges and Solutions](docs/technical_challenges.md).
 
 ---
 
-## 14. Repository Structure
+## 12. Getting Started
+
+### Prerequisites
+
+- Python 3.10 or later.
+- Microsoft SQL Server.
+- SQL Server Management Studio.
+- Power BI Desktop.
+- Git.
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/sastry-hash/uk-regional-gva-data-warehouse.git
+
+cd uk-regional-gva-data-warehouse
+```
+
+### Python Setup
+
+Install Pandas:
+
+```bash
+pip install pandas
+```
+
+### Data Preparation
+
+The Python script expects a prepared CSV containing the eight analytical fields described in Section 5.
+
+Run the preparation script:
+
+```bash
+python python/01_prepare_data.py
+```
+
+The script exports a pipe-delimited dataset for SQL Server ingestion.
+
+**Note:** Full reproduction from the original ONS source requires the source-to-prepared-data transformation. The documented Python script assumes the eight-column analytical dataset is already available.
+
+### SQL Server Setup
+
+Execute the SQL scripts in the following order:
+
+1. Database and schema creation.
+2. Bronze ingestion.
+3. Silver transformations.
+4. Gold dimensional model.
+5. Analytical SQL views.
+6. Stored procedure and indexing.
+7. Data validation.
+
+Update local file paths and SQL Server connection settings as required.
+
+### Power BI Setup
+
+1. Open Power BI Desktop.
+2. Connect to the SQL Server database.
+3. Import the Gold fact and dimension tables.
+4. Configure one-to-many relationships.
+5. Create the documented DAX measures.
+6. Build the three analytical dashboard pages.
+7. Validate KPI values and interactive filtering.
+
+---
+
+## 13. Repository Structure
 
 ```text
 uk-regional-gva-data-warehouse/
 │
 ├── README.md
-├── LICENSE
 ├── .gitignore
 │
-├── data/
-│   └── README.md
+├── docs/
+│   ├── data_dictionary.md
+│   ├── technical_challenges.md
+│   └── setup_guide.md
 │
 ├── python/
 │   └── 01_prepare_data.py
 │
 ├── sql/
-│   ├── bronze/
-│   ├── silver/
-│   ├── gold/
-│   └── validation/
+│   ├── 01_database_setup/
+│   ├── 02_bronze_load/
+│   ├── 03_silver_transform/
+│   ├── 04_gold_star_schema/
+│   ├── 05_reporting_views/
+│   ├── 06_stored_procedure_indexes/
+│   └── 07_validation/
 │
 ├── powerbi/
-│   ├── measures.dax
-│   └── README.md
+│   ├── README.md
+│   └── measures.dax
 │
-├── docs/
-│   └── technical_challenges.md
-│
-└── images/
-    ├── architecture.png
-    ├── star_schema.png
+└── screenshots/
     ├── regional_overview.png
     ├── industry_performance.png
-    └── covid_recovery.png
+    └── covid_impact.png
 ```
 
----
-
-## 15. Key Skills Demonstrated
-
-**Data Engineering:** ETL, data ingestion, data preparation, Bronze–Silver–Gold architecture, data quality.
-
-**SQL Development:** T-SQL, SQL Server, joins, window functions, stored procedures, views and indexing.
-
-**Data Modelling:** Star schema, dimensional modelling, fact and dimension tables, primary and foreign keys.
-
-**Business Intelligence:** Power BI, DAX, KPI development, interactive reporting and analytical modelling.
-
-**Development Practices:** Git, GitHub, technical documentation and reproducible project organisation.
+The structure above represents the intended documented project organisation. File availability and exact screenshot names should be verified against the repository before publication.
 
 ---
 
-## 16. Future Enhancements
+## 14. Key Skills Demonstrated
+
+**Data Engineering:** ETL development, data ingestion, Python data preparation, Medallion Architecture and data quality validation.
+
+**SQL Development:** SQL Server, T-SQL, joins, aggregations, window functions, stored procedures, views and indexing.
+
+**Data Modelling:** Dimensional modelling, star schema, fact and dimension tables, surrogate keys and referential integrity.
+
+**Business Intelligence:** Power BI, DAX, semantic modelling, KPI development, interactive dashboards and analytical reporting.
+
+**Development Practices:** Git, GitHub, technical documentation, version control and reproducible project organisation.
+
+---
+
+## 15. Future Enhancements
 
 Potential improvements include:
 
-- Automated ingestion and scheduled ETL execution.
-- Incremental loading.
-- Automated data-quality tests.
-- Cloud-based data warehouse deployment.
+- Automated ingestion and scheduled ETL workflows.
+- Incremental loading and refresh.
+- Automated data-quality testing.
+- Cloud-based warehouse deployment.
 - Power BI Service publishing.
-- Additional UK economic datasets.
-- Expanded regional productivity and industry analysis.
+- Additional economic datasets.
+- Expanded regional productivity analysis.
+- Improved pipeline monitoring and logging.
 
 ---
 
-## 17. Author
+## 16. Author
 
 **Yanamandra Sri Rama Subrahmanya Sastry**
 
@@ -594,6 +591,8 @@ University of Liverpool
 
 ## Data Attribution
 
-Data source: Office for National Statistics (ONS).
+**Data Provider:** Office for National Statistics (ONS)
 
-The source dataset and any redistributed extracts remain subject to their applicable licensing and attribution requirements.
+This is an independent technical portfolio project and is not an official ONS reporting product.
+
+The source data and any redistributed extracts remain subject to their applicable licensing and attribution requirements.
